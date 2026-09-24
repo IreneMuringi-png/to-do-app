@@ -1,0 +1,133 @@
+body {
+    background-color:blanchedalmond;
+    font-family: -apple-system,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+.status-filters .filter-btn {
+    margin: 0 4px 8px;
+    border: 1px solid blueviolet;
+    background: transparent;
+    color:blueviolet;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+}
+.status-filters .filter-btn:hover{
+    background:blueviolet;
+    color:azure;
+
+}
+.status-filters .filter-btn.active {
+    background: blueviolet;
+    color:azure;
+    box-shadow: 0 3px 10px rgba(13, 110, 253, 0.3);
+
+}
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius:8px !important;
+    margin-bottom: 8px;
+    border: 1px solid #e9ecef;
+    transition: background 0.15s ease;
+
+}
+.list-group-item:hover {
+    background: #f8f9fa;
+
+}
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.task-info {
+    display: flex;
+    flex-direction: column;
+}
+.task-name {
+    font-weight: 500;
+    color: #212529;
+}
+.task-due {
+    font-weight: 0.75rem;
+    color:#212529;
+
+}
+.task-completed .task-due {
+    color: #ced4da
+}
+.task-completed .task-name {
+    text-decoration: line-through;
+    color: #adb5db;
+}
+.task-overdue .task-due {
+    color: #dc3545;
+    font-weight: 600;
+}
+.priority-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.priority-high {
+    background: #f8d7da;
+    color: #da1324;
+}
+.priority-medium {
+    background: #fff3cd;
+    color: #daa813;
+
+}
+.priority-low {
+    background: #d1e7dd;
+    color: #0d462c;
+}
+.task-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.delete-btn {
+    border: none;
+    background: transparent;
+    color: #adb5bd;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+.delete-btn:hover {
+    background: #f8d7da;
+    color: #dc3545;
+
+}
+#empty-message {
+    font-style: italic;
+}
+#add-btn {
+    background: blueviolet;
+    color: azure;
+    border: none;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+#add-btn:hover {
+    background: #6a1bb0;
+    color: azure;
+}
