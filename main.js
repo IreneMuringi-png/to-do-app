@@ -6,6 +6,8 @@ const priorityInput = document.getElementById('task-priority');
 const dueInput = document.getElementById('task-due');
 const list = document.getElementById('task-list');
 const emptyMessage = document.getElementById('empty-message');
+const themeToggle = document.getElementById('theme-toggle');
+const searchInput = document.getElementById('search-input');
 
 const STORAGE_KEY = 'to-do-app-data';
 function saveToStorage() {
@@ -35,10 +37,19 @@ function escapeHtml(str){
     return div.innerHTML;
 }
 function getFilteredTasks() {
-    if(currentStatus === 'all') return tasks;
-    if (currentStatus ==='active') return tasks.filter(t => !t.completed);
-    if (currentStatus === 'completed')return tasks.filter(t => t.completed);
-    return tasks;
+    let result = tasks;
+    if (currentStatus === 'active') {
+        result = result.filter(t => !t.completed);
+    } else if (currentStatus === 'completed') {
+        result = result.filter(t => t.completed);
+    
+    }
+    const query = searchInput.value.trim().toLowerCase();
+    if (query) {
+        result = result.filter(t => t.name.toLowerCase().includes(query));
+        
+    }
+    return result;
 }
  function addTask(name, priority, dueDate) {
     const task = {
@@ -66,6 +77,37 @@ function getFilteredTasks() {
     saveToStorage();
     renderTasks();
 
+ }
+ function startEditTask(id, nameEl) {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    nameEl.classList.add('editing');
+    nameEl.contentEditable = 'true';
+    nameEl.focus();
+    const range = document.createRange();
+    range.selectNodeContents(nameEl);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    function finish() {
+        const newName = nameEl.textContent.trim();
+        nameEl.classList.remove('editing');
+        nameEl.contentEditable = 'false';
+        if (newName && newName !== task.name) {
+            task.name = newName;
+            saveToStorage();
+        }
+        renderTasks();
+    }
+    nameEl.addEventListener('blur', finish, { once: true});
+    nameEl.addEventListener('keydown', e=> {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            nameEl.blur();
+
+        }
+    });
  }
  function renderTasks(){
     const filtered= getFilteredTasks();
@@ -102,7 +144,22 @@ function getFilteredTasks() {
         list.appendChild(li);
     });
  }
-
+function saveTheme(theme) {
+    localStorage.setItem('todo-theme', theme);
+}
+function loadTheme() {
+    const saved = localStorage.getItem('todo-theme');
+    if (saved === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.textContent =  '☀️';
+    }
+}
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    themeToggle.textContent = isDark ? '☀️' : '🌙'; 
+    saveTheme(isDark ? 'dark' : 'light');
+}
 
  form.addEventListener('submit', e =>{
     e.preventDefault();
@@ -124,6 +181,14 @@ nameInput.focus();
   const deleteBtn = e.target.closest('.delete-btn');
   if (deleteBtn) {
     deleteTask(Number(deleteBtn.dataset.id));
+    return;
+  }
+  const taskName = e.target.closest('.task-name');
+  if (taskName) {
+    const li = taskName.closest('li');
+    const checkboxEl = li.querySelector('.task-checkbox');
+    const id = Number(checkboxEl.dataset.id);
+    startEditTask(id, taskName);
   }
 });
 
@@ -138,5 +203,10 @@ filterButtons.forEach(btn => {
     renderTasks();
   });
 });
+themeToggle.addEventListener('click', toggleTheme);
+searchInput.addEventListener('input', () => { 
+    renderTasks();
+});
  loadFromStorage();
+ loadTheme();
  renderTasks();

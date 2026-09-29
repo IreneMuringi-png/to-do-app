@@ -131,3 +131,115 @@ body {
     background: #6a1bb0;
     color: azure;
 }
+.header-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 24px;
+
+}
+.theme-btn {
+    background: transparent;
+    border: 2px solid #6a1bb0;
+    color: #6a1bb0;
+    font-size: 1.2rem;
+    width: 42px;
+    height: 42px; 
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.theme-btn:hover {
+    background: #6a1bb0;
+    color: azure;
+
+}
+#search-input {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+
+}
+#search-input:focus {
+    outline: none;
+    border-color: #6a1bb0;
+    box-shadow: 0 0 0 3px rgba(106, 27, 176, 0.15);
+
+}
+.task-name {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+
+}
+.task-name.editing {
+    background: rgb(6, 37, 40);
+    outline: 2px solid #6a1bb0;
+    cursor: text;
+
+}
+body.dark {
+    background: #1a1a2e;
+    color: #e9e9e9;
+
+}
+body.dark h1 {
+    color: #e9e9e9;
+}
+  body.dark .list-group-item {
+  background: #26264a;
+  border-color: #3a3a5c;
+  color: #e9e9e9;
+}
+
+body.dark .list-group-item:hover {
+  background: #2e2e54;
+}
+
+body.dark .task-name {
+  color: #e9e9e9;
+}
+
+body.dark .task-due {
+  color: #b0b0c8;
+}
+
+body.dark .task-completed .task-name {
+  color: #6a6a8a;
+}
+
+body.dark #search-input {
+  background: #26264a;
+  border-color: #3a3a5c;
+  color: #e9e9e9;
+}
+
+body.dark #search-input::placeholder {
+  color: #8080a0;
+}
+
+body.dark .theme-btn {
+  border-color: #e9e9e9;
+  color: #e9e9e9;
+}
+
+body.dark .theme-btn:hover {
+  background: #e9e9e9;
+  color: #1a1a2e;
+}
+
+body.dark #empty-message {
+  color: #b0b0c8;
+}
+
+body.dark #add-btn {
+  background: #6a1bb0;
+}
+
+body.dark #add-btn:hover {
+  background: #8a3bd0;
+}
